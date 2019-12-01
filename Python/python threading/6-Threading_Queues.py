@@ -1,5 +1,5 @@
 import queue
-
+import random
 # First in First Out (FIFO) queue
 q = queue.Queue()
 
@@ -25,10 +25,10 @@ import threading
 import time
 
 def putting_thread(q):
+    print('\nStarting Thread')
     while True:
-        print('Starting Thread')
-        time.sleep(5)
-        q.put(5)
+        time.sleep(1)
+        q.put(random.randint(1,10))
         print('put something')
 
 q = queue.Queue()
@@ -36,8 +36,7 @@ t = threading.Thread(target=putting_thread, args=(q,),daemon=True)
 
 t.start()
 
-q.put(2)
-print(q.get())
-print('firts item gotten')
-print(q.get())
-print('finished')
+for _ in range(10):
+    x = q.get()
+    print('\n', x)
+
